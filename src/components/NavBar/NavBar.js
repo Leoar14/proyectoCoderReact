@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import CartWidget from '../CartWidget/CartWidget';
+import {useState} from "react";
 import './NavBar.css'
 
-const Navbar = () => {
+const NavBar = () => {
     const [isOpen,setIsOpen] = useState(false)
     return (
         <nav className="navbar container">
@@ -14,7 +15,7 @@ const Navbar = () => {
                         <a href="/categoria1">West Apptizers</a>
                     </li>
                     <li className="nav_item">
-                        <a href="/categoria2">Tucson Steaks</a>
+                        <a href="#">Tucson Steaks</a>
                     </li>
                     <li className="nav_item">
                         <a href="/categoria3">Favoritos Argentinos</a>
@@ -37,4 +38,4 @@ const Navbar = () => {
 };
 
 
-export default Navbar;
+export default NavBar;
