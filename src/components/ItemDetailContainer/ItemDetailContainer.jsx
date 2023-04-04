@@ -3,13 +3,11 @@ import { getProductByID } from "../asyncMock";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import Counter from "../Counter/Counter"
 import { useParams } from "react-router-dom"
-
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState()
     const [loading, setLoading] = useState(true)
 
     const {itemID} = useParams()
-
     useEffect(() => {
         setLoading(true)
         getProductByID(itemID)

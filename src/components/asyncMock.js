@@ -45,27 +45,27 @@ const products = [
         id: 15, name: 'Brownie & Ice Cream', price: 1700, category: 'desserts', img: './img/brownie.jpg', stock: 25, description:'Brownie tibio con helado de americana.'
     },
 ]
+
 export const getProducts = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(products)
-        },1000)
-        })
+        },1500)
+    })
 }
 
-export const getProductsByCategory = (categoryId) => {
+export const getProductsByCategory = (categoryID) => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(products.filter(prod => prod.category === categoryId))
-        },1000)
-        }
-    )
+            resolve(products.filter(prod => prod.category === categoryID))
+        },1500)
+    })
 }
 
-export const getProductsById = (productId) => {
+export const getProductByID = (productID) => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(products.find(prod => prod.productId === productId))
-        },1000)
-        })
+            resolve(products.find(prod => prod.id === productID))
+        }, 1500)
+    })
 }

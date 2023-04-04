@@ -6,7 +6,7 @@ const NavBar = () => {
     const [isOpen,setIsOpen] = useState(false)
     return (
         <nav className="navbar container">
-            <h1 className="navbar-brand display-2">Delivery's Tucson</h1>
+            <h1 className="navbar-brand display-2">Tucson's Delivery</h1>
             
             
             <div className={`nav_items ${isOpen && "open"}`}>
