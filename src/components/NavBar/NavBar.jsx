@@ -5,7 +5,7 @@ import './NavBar.css'
 const NavBar = () => {
     const [isOpen,setIsOpen] = useState(false)
     return (
-        <nav className="navbar container">
+        <nav className="navbar container-fluid">
             <h1 className="navbar-brand display-2">Tucson's Delivery</h1>
             
             

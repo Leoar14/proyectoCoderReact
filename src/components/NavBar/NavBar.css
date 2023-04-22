@@ -2,14 +2,10 @@
 a{
 text-decoration: none;
 }
-.NavBar{
+.navbar{
     align-items: center;
     justify-content: center;
-
-};
-.navbar{
     background: #aa2222;
-    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
