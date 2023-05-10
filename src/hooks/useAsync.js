@@ -1,32 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
-export const useAsync = (asyncFunction, dependecies = []) => {
-    const [data, setData] = useState(null)
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState (true)
+export const useAsync = (asyncFunction, dependencies = []) => {
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-    if(!Array.isArray(dependecies)) {
-        console.error('No se pasaron de forma correcta las depencias')
-        dependecies = []
+  const executeAsyncFunction = useCallback(async () => {
+    setLoading(true)
+    try {
+      const data = await asyncFunction()
+      setData(data)
+    } catch (error) {
+      setError(error)
+    } finally {
+      setLoading(false)
     }
-    useEffect(() => {
-        setLoading(true)
-        
-        asyncFunction()
-            .then(data => {
-                setData(data)
-            })
-            .catch(error => {
-                setError(error)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }, [...dependecies]) //eslint-disable-line
-    
-    return {
-        data,
-        error,
-        loading
-    }
+  }, [asyncFunction])
+
+  useEffect(() => {
+    executeAsyncFunction()
+  }, [executeAsyncFunction])
+
+  return {
+    data,
+    error,
+    loading
+  }
 }

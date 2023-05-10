@@ -1,34 +1,34 @@
-import { useEffect, useState, memo } from 'react'
+import { useState, useEffect } from 'react'
+import ItemDetail from '../ItemDetail/ItemDetail'
 import { useParams } from 'react-router-dom'
-import ItemList from '../ItemList/ItemList'
-import { getDocs, collection, query, where } from 'firebase/firestore'
-import { db } from '../../services/firebase/firebaseConfig'
-import { getProducts } from '../../services/firebase/firestore/products'
-import { useAsync } from '../../hooks/useAsync'
+import { getDoc, doc } from 'firebase/firestore'
+import { db } from '../../services/fibrebase/fibrebaseConfig'
 
-const ItemListMemo = memo(ItemList)
+const ItemDetailContainer = () => {
+    const [product, setProduct] = useState()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
 
-const ItemListContainer = ({ greeting }) => {
-    const { categoryId } = useParams()
+    const { itemId } = useParams()
 
-    const getProductsWithCategory = () => getProducts(categoryId)
+    useEffect(() => {
+        const productRef = doc(db, 'products', itemId)
+        console.log(db)
+        getDoc(productRef)
+            .then(snapshot => {
+                const data = snapshot.data()
+                const productAdapted = { id: snapshot.id, ...data}
+                setProduct(productAdapted)
+            }).catch(error => {
+                console.log(error)
+            })
+    },[itemId])
 
-    const { data: products, error, loading } = useAsync(getProductsWithCategory, [categoryId])
-
-    if(loading) {
-        return <h1>Cargando...</h1>
-    }
-
-    if(error) {
-        return <h1>Vuelva a cargar la pagina</h1>
-    }
-    
-    return(
-        <div>
-            <h1>{greeting}</h1>
-            <ItemListMemo products={products}/>
+    return (
+        <div className='ItemDetailContainer' >
+            <ItemDetail {...product} />
         </div>
     )
 }
 
-export default ItemListContainer
+export default ItemDetailContainer

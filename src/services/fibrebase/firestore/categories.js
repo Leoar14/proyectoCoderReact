@@ -1,4 +1,4 @@
-import { db } from "../firebaseConfig"
+import { db } from "../fibrebaseConfig"
 import { collection, getDocs, where, query } from "firebase/firestore"
 
 export const getCategories = (categoriesId) => {

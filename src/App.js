@@ -6,7 +6,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import NavBar from './components/NavBar/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
-import { Notification,NotificationProvider } from './Notification/NotificationService'
+import { Notification, NotificationProvider } from './Notification/NotificationService';
 import Login from './components/Login/Login'
 import { AuthProvider } from './context/AuthContext';
 import Cart from './components/Cart/Cart';
@@ -14,24 +14,23 @@ import Checkout from './components/Checkout/Checkout';
 
 const App = () => {
 
-  const props = {titulo: "Bienvenidos a RetroStore", subtitulo: "La mejor tienda de productos retro del pais"}
+  const props = {titulo: "Bienvenidos todos a RetroStore", subtitulo: "La mejor tienda de productos retro del pais"}
 
   return (
     <div className="App">
       <NotificationProvider>
-        <CartProvider>
-          <BrowserRouter>
-            <AuthProvider>
-              <NavBar>
-                <Routes>
-                  <Route path='/' element={<ItemListContainer greeting={'Todos nuestros productos'} />} />
-                  <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Nuestras categorias'} />} />
-                  <Route path='/item/:itemId' element={<ItemDetailContainer />} />
-                  <Route path='/login' element={<Login />} />
-                  <Route path='/cart' element={<Cart />} />
-                  <Route path='/checkout' element={<Checkout />} />
-                </Routes>
-              </NavBar>  
+      <CartProvider>
+        <BrowserRouter>
+          <AuthProvider>
+              <NavBar />
+              <Routes>
+                <Route path='/' element={<ItemListContainer greeting={'Todos nuestros productos'} />} />
+                <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Nuestras categorias'} />} />
+                <Route path='/item/:itemId' element={<ItemDetailContainer />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/checkout' element={<Checkout />} />
+              </Routes>
             </AuthProvider>
           </BrowserRouter>
         </CartProvider>

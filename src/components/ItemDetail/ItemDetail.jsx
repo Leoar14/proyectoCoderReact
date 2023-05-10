@@ -1,21 +1,21 @@
 import { useContext, useState } from "react";
-import ItemCount from '../ItemCount/ItemCount.jsx';
+import ItemCount from '../ItemCount/ItemCount';
 import { CartContext } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
-import { useNotification } from '../../Notification/NotificationService.js'
+import { useNotification } from "../../Notification/NotificationService";
 
 
 const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
-    const [cantidad, setCantidad] = useState(0)
+    const [quantity, setQuantity] = useState(0)
     const { addItem } = useContext(CartContext)
 
 
-    const handleOnAdd = (cantidad) => {
+    const handleOnAdd = (quantity) => {
         const productoParaAgregar = {
-            id, name, price, cantidad, stock
+            id, name, price, quantity, stock
             
         }
-        setCantidad(cantidad)
+        setQuantity(quantity)
         addItem(productoParaAgregar)
     }
 
@@ -40,11 +40,15 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                     Precio: {price}
                 </p>
             </section>           
-            <div className='ItemDiv'>
+            <footer className='ItemFooter'>
+                {/* {
+                    cantidad > 0 ? (
+                        <Link to='/cart'>Terminar compra</Link>
+                    ) : ( */}
                         {stock > 0 ? <ItemCount onAdd={handleOnAdd} stock={stock} /> : <div>No hay stock disponible</div>}
                     {/* )
                 } */}
-            </div>
+            </footer>
         </article>
     )
 }
